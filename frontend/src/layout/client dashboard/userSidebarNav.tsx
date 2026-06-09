@@ -40,21 +40,21 @@ const items = [
     url: "/dashboard/mycomplains",
     icon: Search,
   },
-  {
-    title: "Profile",
-    url: "/dashboard/profile",
-    icon: User,
-  },
-  {
-    title: "Notifications",
-    url: "/dashboard/notifications",
-    icon: AlertCircle,
-  },
-  {
-    title: "Settings",
-    url: "/dashboard/settings",
-    icon: Settings,
-  },
+  // {
+  //   title: "Profile",
+  //   url: "/dashboard/profile",
+  //   icon: User,
+  // },
+  // {
+  //   title: "Notifications",
+  //   url: "/dashboard/notifications",
+  //   icon: AlertCircle,
+  // },
+  // {
+  //   title: "Settings",
+  //   url: "/dashboard/settings",
+  //   icon: Settings,
+  // },
 ];
 
 const UserSidebarNav = () => {

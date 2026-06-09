@@ -134,7 +134,7 @@ export default function MyComplaints() {
   const getStatusIcon = (status: string) => {
     switch (status) {
       case 'resolved': return <CheckCircle className="h-4 w-4" />;
-      case 'in-progress': return <Clock className="h-4 w-4" />;
+      case 'in-progress': return <RefreshCw className="h-4 w-4" />;
       case 'pending': return <Clock className="h-4 w-4" />;
       case 'rejected': return <AlertCircle className="h-4 w-4" />;
       default: return <FileText className="h-4 w-4" />;
@@ -143,21 +143,21 @@ export default function MyComplaints() {
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'resolved': return 'bg-green-100 text-green-800 border-green-200';
-      case 'in-progress': return 'bg-blue-100 text-blue-800 border-blue-200';
-      case 'pending': return 'bg-yellow-100 text-yellow-800 border-yellow-200';
-      case 'rejected': return 'bg-red-100 text-red-800 border-red-200';
-      default: return 'bg-gray-100 text-gray-800 border-gray-200';
+      case 'resolved': return 'bg-gr5 text-gr6 border-gr3';
+      case 'in-progress': return 'bg-bl5 text-bl6 border-bl3';
+      case 'pending': return 'bg-yl1 text-yl6 border-yl3';
+      case 'rejected': return 'bg-rd1 text-rd6 border-rd3';
+      default: return 'bg-bg3 text-fg2 border-bg0';
     }
   };
 
   const getPriorityColor = (priority: string) => {
     switch (priority) {
-      case 'urgent': return 'bg-red-100 text-red-800';
-      case 'high': return 'bg-orange-100 text-orange-800';
-      case 'medium': return 'bg-yellow-100 text-yellow-800';
-      case 'low': return 'bg-green-100 text-green-800';
-      default: return 'bg-gray-100 text-gray-800';
+      case 'urgent': return 'bg-rd1 text-rd6';
+      case 'high': return 'bg-or1 text-or6';
+      case 'medium': return 'bg-yl1 text-yl6';
+      case 'low': return 'bg-gr1 text-gr6';
+      default: return 'bg-bg3 text-fg2';
     }
   };
 
@@ -198,28 +198,28 @@ export default function MyComplaints() {
   if (!token) {
     return (
       <div className="max-w-7xl mx-auto p-6">
-        <div className="bg-white rounded-xl shadow-lg p-8 text-center">
-          <AlertCircle className="h-16 w-16 text-yellow-500 mx-auto mb-4" />
-          <h2 className="text-2xl font-bold text-gray-900 mb-2">Authentication Required</h2>
-          <p className="text-gray-600 mb-6">Please log in to view your complaints</p>
+        <div className="bg-bg1 rounded-xl shadow-lg p-8 text-center border border-bg0">
+          <AlertCircle className="h-16 w-16 text-yl6 mx-auto mb-4" />
+          <h2 className="text-2xl font-bold text-fg2 mb-2">Authentication Required</h2>
+          <p className="text-fg2 mb-6">Please log in to view your complaints</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="max-w-7xl mx-auto p-6 space-y-6">
+    <div className="max-w-7xl mx-auto p-6 space-y-6 text-fg2">
       {/* Header */}
       <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">My Complaints</h1>
-          <p className="text-gray-600 mt-2">Manage and track all your submitted complaints</p>
+          <h1 className="text-3xl font-bold text-fg2">My Complaints</h1>
+          <p className="text-fg2 mt-2">Manage and track all your submitted complaints</p>
         </div>
         <div className="flex space-x-3 mt-4 lg:mt-0">
           <button
             onClick={exportComplaints}
             disabled={filteredComplaints.length === 0}
-            className="flex items-center space-x-2 bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
+            className="flex items-center space-x-2 bg-gr5 text-fg0 px-4 py-2 rounded-lg hover:bg-gr6 disabled:bg-bg3 disabled:cursor-not-allowed transition-colors"
           >
             <Download className="h-4 w-4" />
             <span>Export CSV</span>
@@ -227,7 +227,7 @@ export default function MyComplaints() {
           <button
             onClick={fetchComplaints}
             disabled={loading}
-            className="flex items-center space-x-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
+            className="flex items-center space-x-2 bg-bl6 text-fg0 px-4 py-2 rounded-lg hover:bg-bl7 disabled:bg-bg3 disabled:cursor-not-allowed transition-colors"
           >
             <RefreshCw className={`h-4 w-4 ${loading ? 'animate-spin' : ''}`} />
             <span>{loading ? "Refreshing..." : "Refresh"}</span>
@@ -236,66 +236,76 @@ export default function MyComplaints() {
       </div>
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-        <div className="bg-white rounded-xl shadow-lg p-4 border border-gray-200">
+      <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
+        <div className="bg-bg1 rounded-xl shadow-lg p-6 border border-bg0 hover:shadow-xl transition-shadow duration-300">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-gray-600">Total</p>
-              <p className="text-2xl font-bold text-gray-900">{stats.total}</p>
+              <p className="text-sm font-medium text-fg2">Total</p>
+              <p className="text-2xl font-bold text-fg2">{stats.total}</p>
             </div>
-            <FileText className="h-8 w-8 text-blue-500" />
+            <div className="p-3 rounded-full bg-bl5">
+              <FileText className="h-6 w-6 text-fg9" />
+            </div>
           </div>
         </div>
-        <div className="bg-white rounded-xl shadow-lg p-4 border border-gray-200">
+        <div className="bg-bg1 rounded-xl shadow-lg p-6 border border-bg0 hover:shadow-xl transition-shadow duration-300">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-gray-600">Pending</p>
-              <p className="text-2xl font-bold text-yellow-600">{stats.pending}</p>
+              <p className="text-sm font-medium text-fg2">Pending</p>
+              <p className="text-2xl font-bold text-yl6">{stats.pending}</p>
             </div>
-            <Clock className="h-8 w-8 text-yellow-500" />
+            <div className="p-3 rounded-full bg-yl1">
+              <Clock className="h-6 w-6 text-fg9" />
+            </div>
           </div>
         </div>
-        <div className="bg-white rounded-xl shadow-lg p-4 border border-gray-200">
+        <div className="bg-bg1 rounded-xl shadow-lg p-6 border border-bg0 hover:shadow-xl transition-shadow duration-300">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-gray-600">In Progress</p>
-              <p className="text-2xl font-bold text-blue-600">{stats.inProgress}</p>
+              <p className="text-sm font-medium text-fg2">In Progress</p>
+              <p className="text-2xl font-bold text-bl6">{stats.inProgress}</p>
             </div>
-            <Clock className="h-8 w-8 text-blue-500" />
+            <div className="p-3 rounded-full bg-bl5">
+              <RefreshCw className="h-6 w-6 text-fg9" />
+            </div>
           </div>
         </div>
-        <div className="bg-white rounded-xl shadow-lg p-4 border border-gray-200">
+        <div className="bg-bg1 rounded-xl shadow-lg p-6 border border-bg0 hover:shadow-xl transition-shadow duration-300">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-gray-600">Resolved</p>
-              <p className="text-2xl font-bold text-green-600">{stats.resolved}</p>
+              <p className="text-sm font-medium text-fg2">Resolved</p>
+              <p className="text-2xl font-bold text-gr6">{stats.resolved}</p>
             </div>
-            <CheckCircle className="h-8 w-8 text-green-500" />
+            <div className="p-3 rounded-full bg-gr5">
+              <CheckCircle className="h-6 w-6 text-fg9" />
+            </div>
           </div>
         </div>
-        <div className="bg-white rounded-xl shadow-lg p-4 border border-gray-200">
+        <div className="bg-bg1 rounded-xl shadow-lg p-6 border border-bg0 hover:shadow-xl transition-shadow duration-300">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-gray-600">Rejected</p>
-              <p className="text-2xl font-bold text-red-600">{stats.rejected}</p>
+              <p className="text-sm font-medium text-fg2">Rejected</p>
+              <p className="text-2xl font-bold text-rd6">{stats.rejected}</p>
             </div>
-            <AlertCircle className="h-8 w-8 text-red-500" />
+            <div className="p-3 rounded-full bg-rd1">
+              <AlertCircle className="h-6 w-6 text-fg9" />
+            </div>
           </div>
         </div>
       </div>
 
       {/* Filters and Search */}
-      <div className="bg-white rounded-xl shadow-lg p-6">
+      <div className="bg-bg1 rounded-xl shadow-lg p-6 border border-bg0">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {/* Search */}
           <div className="relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-fg2 h-4 w-4" />
             <input
               type="text"
               placeholder="Search complaints..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full pl-10 pr-4 py-2 bg-bg2 border border-bg0 rounded-lg focus:ring-2 focus:ring-bl6 focus:border-bl6 text-fg2 placeholder-fg2"
             />
           </div>
 
@@ -303,7 +313,7 @@ export default function MyComplaints() {
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            className="w-full px-4 py-2 bg-bg2 border border-bg0 rounded-lg focus:ring-2 focus:ring-bl6 focus:border-bl6 text-fg2"
           >
             <option value="all">All Status</option>
             <option value="pending">Pending</option>
@@ -316,7 +326,7 @@ export default function MyComplaints() {
           <select
             value={priorityFilter}
             onChange={(e) => setPriorityFilter(e.target.value)}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            className="w-full px-4 py-2 bg-bg2 border border-bg0 rounded-lg focus:ring-2 focus:ring-bl6 focus:border-bl6 text-fg2"
           >
             <option value="all">All Priority</option>
             <option value="urgent">Urgent</option>
@@ -328,10 +338,10 @@ export default function MyComplaints() {
       </div>
 
       {/* Complaints List */}
-      <div className="bg-white rounded-xl shadow-lg overflow-hidden">
+      <div className="bg-bg1 rounded-xl shadow-lg border border-bg0 overflow-hidden">
         {error && (
-          <div className="bg-red-50 border border-red-200 p-4 m-6 rounded-lg">
-            <p className="text-red-800 flex items-center">
+          <div className="bg-rd1 border border-rd3 p-4 m-6 rounded-lg">
+            <p className="text-rd6 flex items-center">
               <AlertCircle className="h-4 w-4 mr-2" />
               {error}
             </p>
@@ -340,20 +350,20 @@ export default function MyComplaints() {
 
         {loading && complaints.length === 0 ? (
           <div className="p-8 text-center">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto"></div>
-            <p className="text-gray-600 mt-2">Loading complaints...</p>
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-bl6 mx-auto"></div>
+            <p className="text-fg2 mt-2">Loading complaints...</p>
           </div>
         ) : filteredComplaints.length === 0 ? (
           <div className="p-8 text-center">
-            <FileText className="h-16 w-16 text-gray-400 mx-auto mb-4" />
-            <h3 className="text-lg font-medium text-gray-900 mb-2">No complaints found</h3>
-            <p className="text-gray-500 mb-4">
+            <FileText className="h-16 w-16 text-fg2 mx-auto mb-4" />
+            <h3 className="text-lg font-medium text-fg2 mb-2">No complaints found</h3>
+            <p className="text-fg2 mb-4">
               {complaints.length === 0 ? "You haven't submitted any complaints yet." : "No complaints match your filters."}
             </p>
             {complaints.length === 0 && (
               <button
                 onClick={() => window.location.href = '/dashboard/newcomplains'}
-                className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+                className="bg-bl6 text-fg0 px-6 py-2 rounded-lg hover:bg-bl7 transition-colors"
               >
                 Submit Your First Complaint
               </button>
@@ -362,39 +372,39 @@ export default function MyComplaints() {
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full">
-              <thead className="bg-gray-50 border-b border-gray-200">
+              <thead className="bg-bg2 border-b border-bg0">
                 <tr>
-                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-4 text-left text-xs font-medium text-fg2 uppercase tracking-wider">
                     Complaint
                   </th>
-                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-4 text-left text-xs font-medium text-fg2 uppercase tracking-wider">
                     Category
                   </th>
-                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-4 text-left text-xs font-medium text-fg2 uppercase tracking-wider">
                     Priority
                   </th>
-                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-4 text-left text-xs font-medium text-fg2 uppercase tracking-wider">
                     Status
                   </th>
-                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-4 text-left text-xs font-medium text-fg2 uppercase tracking-wider">
                     Created
                   </th>
-                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-4 text-left text-xs font-medium text-fg2 uppercase tracking-wider">
                     Actions
                   </th>
                 </tr>
               </thead>
-              <tbody className="bg-white divide-y divide-gray-200">
+              <tbody className="bg-bg1 divide-y divide-bg0">
                 {filteredComplaints.map((complaint) => (
-                  <tr key={complaint._id} className="hover:bg-gray-50 transition-colors">
+                  <tr key={complaint._id} className="hover:bg-bg4 transition-colors">
                     <td className="px-6 py-4">
                       <div>
-                        <h3 className="font-medium text-gray-900 line-clamp-1">{complaint.title}</h3>
-                        <p className="text-sm text-gray-500 line-clamp-2 mt-1">{complaint.description}</p>
+                        <h3 className="font-medium text-fg2 line-clamp-1">{complaint.title}</h3>
+                        <p className="text-sm text-fg2 line-clamp-2 mt-1">{complaint.description}</p>
                       </div>
                     </td>
                     <td className="px-6 py-4">
-                      <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                      <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-bl5 text-fg9">
                         {complaint.category}
                       </span>
                     </td>
@@ -406,23 +416,23 @@ export default function MyComplaints() {
                     <td className="px-6 py-4">
                       <span className={`inline-flex items-center space-x-1 px-2.5 py-0.5 rounded-full text-xs font-medium border ${getStatusColor(complaint.status)}`}>
                         {getStatusIcon(complaint.status)}
-                        <span>{complaint.status}</span>
+                        <span className="capitalize">{complaint.status}</span>
                       </span>
                     </td>
-                    <td className="px-6 py-4 text-sm text-gray-500">
+                    <td className="px-6 py-4 text-sm text-fg2">
                       {formatDate(complaint.createdAt)}
                     </td>
                     <td className="px-6 py-4">
                       <div className="flex items-center space-x-2">
                         <button
                           onClick={() => setSelectedComplaint(complaint)}
-                          className="text-blue-600 hover:text-blue-900 transition-colors"
+                          className="text-bl6 hover:text-bl7 transition-colors"
                           title="View Details"
                         >
                           <Eye className="h-4 w-4" />
                         </button>
                         <button
-                          className="text-gray-600 hover:text-gray-900 transition-colors"
+                          className="text-fg2 hover:text-fg1 transition-colors"
                           title="More Options"
                         >
                           <MoreVertical className="h-4 w-4" />
@@ -438,9 +448,9 @@ export default function MyComplaints() {
 
         {/* Pagination */}
         {filteredComplaints.length > 0 && (
-          <div className="px-6 py-4 border-t border-gray-200">
+          <div className="px-6 py-4 border-t border-bg0">
             <div className="flex items-center justify-between">
-              <p className="text-sm text-gray-700">
+              <p className="text-sm text-fg2">
                 Showing <span className="font-medium">{filteredComplaints.length}</span> of{' '}
                 <span className="font-medium">{complaints.length}</span> complaints
               </p>
@@ -452,13 +462,13 @@ export default function MyComplaints() {
       {/* Complaint Detail Modal */}
       {selectedComplaint && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+          <div className="bg-bg1 rounded-xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto border border-bg0">
             <div className="p-6">
               <div className="flex items-center justify-between mb-4">
-                <h2 className="text-2xl font-bold text-gray-900">Complaint Details</h2>
+                <h2 className="text-2xl font-bold text-fg2">Complaint Details</h2>
                 <button
                   onClick={() => setSelectedComplaint(null)}
-                  className="text-gray-400 hover:text-gray-600 transition-colors"
+                  className="text-fg2 hover:text-fg1 transition-colors"
                 >
                   <X className="h-6 w-6" />
                 </button>
@@ -466,18 +476,18 @@ export default function MyComplaints() {
 
               <div className="space-y-4">
                 <div>
-                  <label className="text-sm font-medium text-gray-700">Title</label>
-                  <p className="text-lg font-semibold text-gray-900 mt-1">{selectedComplaint.title}</p>
+                  <label className="text-sm font-medium text-fg2">Title</label>
+                  <p className="text-lg font-semibold text-fg2 mt-1">{selectedComplaint.title}</p>
                 </div>
 
                 <div>
-                  <label className="text-sm font-medium text-gray-700">Description</label>
-                  <p className="text-gray-700 mt-1 whitespace-pre-wrap">{selectedComplaint.description}</p>
+                  <label className="text-sm font-medium text-fg2">Description</label>
+                  <p className="text-fg2 mt-1 whitespace-pre-wrap">{selectedComplaint.description}</p>
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="text-sm font-medium text-gray-700">Status</label>
+                    <label className="text-sm font-medium text-fg2">Status</label>
                     <div className="mt-1">
                       <span className={`inline-flex items-center space-x-1 px-3 py-1 rounded-full text-sm font-medium border ${getStatusColor(selectedComplaint.status)}`}>
                         {getStatusIcon(selectedComplaint.status)}
@@ -487,7 +497,7 @@ export default function MyComplaints() {
                   </div>
 
                   <div>
-                    <label className="text-sm font-medium text-gray-700">Priority</label>
+                    <label className="text-sm font-medium text-fg2">Priority</label>
                     <div className="mt-1">
                       <span className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${getPriorityColor(selectedComplaint.priority)}`}>
                         <span className="capitalize">{selectedComplaint.priority}</span>
@@ -498,13 +508,13 @@ export default function MyComplaints() {
 
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="text-sm font-medium text-gray-700">Category</label>
-                    <p className="text-gray-900 mt-1">{selectedComplaint.category}</p>
+                    <label className="text-sm font-medium text-fg2">Category</label>
+                    <p className="text-fg2 mt-1">{selectedComplaint.category}</p>
                   </div>
 
                   <div>
-                    <label className="text-sm font-medium text-gray-700">Assigned To</label>
-                    <p className="text-gray-900 mt-1">
+                    <label className="text-sm font-medium text-fg2">Assigned To</label>
+                    <p className="text-fg2 mt-1">
                       {selectedComplaint.assignedTo ? selectedComplaint.assignedTo.name : 'Not assigned'}
                     </p>
                   </div>
@@ -512,21 +522,21 @@ export default function MyComplaints() {
 
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="text-sm font-medium text-gray-700">Created</label>
-                    <p className="text-gray-900 mt-1">{formatDate(selectedComplaint.createdAt)}</p>
+                    <label className="text-sm font-medium text-fg2">Created</label>
+                    <p className="text-fg2 mt-1">{formatDate(selectedComplaint.createdAt)}</p>
                   </div>
 
                   <div>
-                    <label className="text-sm font-medium text-gray-700">Last Updated</label>
-                    <p className="text-gray-900 mt-1">{formatDate(selectedComplaint.updatedAt)}</p>
+                    <label className="text-sm font-medium text-fg2">Last Updated</label>
+                    <p className="text-fg2 mt-1">{formatDate(selectedComplaint.updatedAt)}</p>
                   </div>
                 </div>
               </div>
 
-              <div className="flex justify-end space-x-3 mt-6 pt-4 border-t border-gray-200">
+              <div className="flex justify-end space-x-3 mt-6 pt-4 border-t border-bg0">
                 <button
                   onClick={() => setSelectedComplaint(null)}
-                  className="px-4 py-2 text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+                  className="px-4 py-2 text-fg2 border border-bg0 rounded-lg hover:bg-bg4 transition-colors"
                 >
                   Close
                 </button>
