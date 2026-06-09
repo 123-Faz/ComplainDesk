@@ -3,9 +3,8 @@ import { useRoutes } from "react-router-dom";
 import MainLayout from "@/layout/MainLayout";
 import ClientDashboard from "@/layout/client dashboard/index";
 import AdDashboard from "@/layout/admin dashboard";
-import AdminLayout from "@/layout/adminDashboard/AdminLaout";
 import { lazy } from "react";
-import { AdminProtectedRoute, GuestAdminRoutes } from "@/routes/ProtectedRoutes";
+import { AdminProtectedRoute } from "@/routes/ProtectedRoutes";
 
 // Pages
 const HomePage = lazy(() => import("@/pages/home"));

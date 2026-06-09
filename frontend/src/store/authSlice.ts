@@ -1,6 +1,7 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import type { RootState } from "./types";
 import Cookies from 'js-cookie'
+import { getCurrentUser } from "@/services/auth.service"
 
 interface AuthState {
     user: UserI | null;
@@ -22,6 +23,21 @@ const initialState: AuthState = {
     user: null,
     token: Cookies.get('token'),
 };
+
+export const fetchUser = createAsyncThunk(
+    'auth/fetchUser',
+    async (_, { getState, rejectWithValue }) => {
+        try {
+            const state = getState() as RootState;
+            const token = state.auth.token;
+            if (!token) return rejectWithValue('No token');
+            const user = await getCurrentUser(token);
+            return user;
+        } catch (error) {
+            return rejectWithValue(error);
+        }
+    }
+);
 
 export const authSlice = createSlice({
     name: "auth",
@@ -45,6 +61,11 @@ export const authSlice = createSlice({
             state.token = undefined;
             Cookies.remove('token');
         },
+    },
+    extraReducers: (builder) => {
+        builder.addCase(fetchUser.fulfilled, (state, action) => {
+            state.user = action.payload;
+        });
     }
 });
 
