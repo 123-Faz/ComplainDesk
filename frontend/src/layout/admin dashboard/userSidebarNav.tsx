@@ -1,9 +1,7 @@
 import {
   Home,
-  Settings,
   MessageCircle,
   Users,
-  Bell,
   BarChart3,
 } from "lucide-react";
 
@@ -34,21 +32,11 @@ const items = [
     url: "/admin_dashboard/users",
     icon: Users,
   },
-  // {
-  //   title: "Notification",
-  //   url: "/admin_dashboard/notifications",
-  //   icon: Bell,
-  // },
   {
     title: "Reports",
     url: "/admin_dashboard/reports",
     icon: BarChart3,
   },
-  // {
-  //   title: "Settings",
-  //   url: "/admin_dashboard/settings",
-  //   icon: Settings,
-  // },
 ];
 
 const UserSidebarNav = () => {

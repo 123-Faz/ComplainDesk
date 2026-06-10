@@ -3,9 +3,6 @@ import {
   Home,
   Inbox,
   Search,
-  Settings,
-  AlertCircle,
-  User,
 } from "lucide-react";
 
 import {
@@ -40,21 +37,6 @@ const items = [
     url: "/dashboard/mycomplains",
     icon: Search,
   },
-  // {
-  //   title: "Profile",
-  //   url: "/dashboard/profile",
-  //   icon: User,
-  // },
-  // {
-  //   title: "Notifications",
-  //   url: "/dashboard/notifications",
-  //   icon: AlertCircle,
-  // },
-  // {
-  //   title: "Settings",
-  //   url: "/dashboard/settings",
-  //   icon: Settings,
-  // },
 ];
 
 const UserSidebarNav = () => {
