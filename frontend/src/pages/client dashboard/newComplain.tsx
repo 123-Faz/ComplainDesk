@@ -277,21 +277,6 @@ export default function NewComplaint() {
     }
   };
 
-  const getPriorityColor = (priority: string) => {
-    switch (priority) {
-      case 'urgent': return 'rd';
-      case 'high': return 'or';
-      case 'medium': return 'yl';
-      case 'low': return 'gr';
-      default: return 'bl';
-    }
-  };
-
-  const getCategoryIcon = (categoryValue: string) => {
-    const category = CATEGORIES.find(c => c.value === categoryValue);
-    return category ? category.icon : "📝";
-  };
-
   if (!token) {
     return (
       <div className="max-w-4xl mx-auto p-6">
