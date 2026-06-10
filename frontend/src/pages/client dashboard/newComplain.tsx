@@ -13,7 +13,6 @@ import {
   User,
   Calendar,
   Flag,
-  Tag,
   X,
   HelpCircle,
   Info,
