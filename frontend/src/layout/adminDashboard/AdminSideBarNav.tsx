@@ -17,10 +17,10 @@ interface AdminSidebarProps {
   setActiveSection: (section: string) => void;
 }
 
-const AdminSidebar: React.FC<AdminSidebarProps> = ({ 
-  isOpen, 
-  activeSection, 
-  setActiveSection 
+const AdminSidebar: React.FC<AdminSidebarProps> = ({
+  isOpen,
+  activeSection: _activeSection,
+  setActiveSection
 }) => {
   const location = useLocation();
   const navigate = useNavigate();

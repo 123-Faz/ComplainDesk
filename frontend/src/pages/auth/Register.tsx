@@ -29,7 +29,6 @@ const Register: React.FC<RegisterProps> = ({
     handleSubmit,
     formState: { errors, isSubmitting },
     reset,
-    watch,
   } = useForm<RegisterFormValues>({
     resolver: zodResolver(registerFormSchema),
     defaultValues: { 

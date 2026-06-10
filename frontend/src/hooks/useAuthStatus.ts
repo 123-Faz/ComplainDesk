@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import {  getAuthToken, getUser } from "@/store/authSlice";
+import { getAuthToken, getUser, fetchUser } from "@/store/authSlice";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 

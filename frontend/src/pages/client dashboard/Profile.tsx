@@ -1,6 +1,6 @@
 // src/pages/client dashboard/profile.tsx
 import { useSelector } from "react-redux";
-import { getAuthToken, getUser } from "@/store/authSlice";
+import { getAuthToken } from "@/store/authSlice";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useOutletContext } from "react-router-dom";
@@ -31,7 +31,6 @@ interface UserProfile {
 
 export default function Profile() {
   const token = useSelector(getAuthToken);
-  const currentUser = useSelector(getUser);
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [isEditing, setIsEditing] = useState(false);
   const [loading, setLoading] = useState(true);
