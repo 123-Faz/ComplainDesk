@@ -119,7 +119,7 @@ export default function AdminComplaints() {
 
     setActionLoading(complaintId);
     try {
-      const res = await axios.put(
+      await axios.put(
         `http://localhost:8000/api/v1/admin/complaints/update-status/${complaintId}`,
         { status: newStatus },
         {
